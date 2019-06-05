@@ -1,0 +1,53 @@
+﻿@using Domain
+@using Domain.Common.SystemMenu
+@using Infrastructure.Extends;
+@using Infrastructure
+@{
+
+    var munelist = IocContainer.Resolve<ISystemMenuRepository>().GetAll();
+    //if (!RuntimeHelper.CurrentUser.IsAdmin)
+    //{
+    //    munelist = munelist.Where(p => RuntimeHelper.CurrentUser.RoleMenuList.Any(t => t.MenuId == p.Id)).ToList();
+    //}
+
+    var menuHead = munelist.Where(p => p.ParenId == 0);
+    var group = menuHead.GroupBy(p => p.SystemMenuType).OrderByDescending(p => p.Key);
+}
+
+@foreach (var g in group)
+{
+    <div class="menu_section">
+        <h3>@g.Key.ToDescription()</h3>
+        <ul class="nav side-menu">
+            @foreach (var head in g)
+            {
+                <li>
+                    <a><i class="fa fa-@head.Icon"></i> @head.Name <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        @foreach (var item in head.GetSystemMenuList(munelist))
+                        {
+
+                            if (item.GetSystemMenuList(munelist).Any())
+                            {
+                                <li>
+                                    <a> @item.Name <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        @foreach (var item1 in item.GetSystemMenuList(munelist))
+                                        {
+                                            <li><a href="@Url.Content(item1.Url)">@item1.Name</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a href="#" onclick="javascript:openPage('@item.Name','@Url.Content(item.Url)',true);">@item.Name</a></li>
+                            }
+                        }
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+}

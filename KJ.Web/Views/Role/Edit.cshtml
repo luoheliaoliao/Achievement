@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Domain.Users.Role
+<div class="x_content" style="margin-top:20px;" id="content_from">
+    <table class="fromtable">
+        <tr>
+            <td class="tfromtabletd">      <label>姓名<span class="required" style="color:red; ">*</span>：</label></td>
+            <td class="tfromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control input-defalut" v-model="Name" validtype="required" id="Name">
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tfromtabletd">      <label>菜单权限：</label></td>
+            <td class="tfromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <ul id="treeBox" class="easyui-tree"></ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tfromtabletd" style=" width: 15%;">      <label>备注：</label></td>
+            <td class="tfromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <textarea id="txtContent" style=" width: 100%; height: 100px; border: 0;" maxlength="500" v-model="Desc"></textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tfromtabletd" style=" width: 15%;">  </td>
+            <td class="tfromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12" style="margin-top:8px;">
+                    <button type="submit" class="btn btn-success" onclick="Save()">保存</button>
+                    <button class="btn btn-primary" type="button" onclick="javascript: PW.Close()">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    var vue = new Vue({
+        el: '#content_from',
+        data:{
+            Name: '@Model.Name',
+            Desc: '@Model.Desc',
+            Id: '@Model.Id'
+        }
+    })
+    $(function () {
+        $('#treeBox').tree({
+            url: '@Url.Content("~/Role/GetMenuList/")' + '@Model.Id',
+            method: 'get',
+            checkbox: true,
+            onLoadSuccess: function () {
+                $(".tree-icon,.tree-file").removeClass("tree-icon tree-file");
+                $(".tree-icon,.tree-folder").removeClass("tree-icon tree-folder tree-folder-open tree-folder-closed");
+            }
+        })
+    });
+
+    function Save()
+    {
+        if (!$.validatebox.valid())
+            return;
+        var ids = [];
+        $.each($("#treeBox").tree('getChecked', ['checked', 'indeterminate']), function (index, value) {
+            ids.push(value["id"]);
+        })
+        var param = {
+            Name: vue.Name,
+            Desc: vue.Desc,
+            Id: vue.Id,
+            MenuIds: ids,
+        }
+
+        if(ids.length==0)
+        {
+            alert("请选择权限！");
+            return;
+        }
+
+        $.U1Ajax("@Url.Content("~/Role/Update")", param, function (result) {
+            parent.Refresh();
+            PW.Close();
+        })
+    }
+</script>

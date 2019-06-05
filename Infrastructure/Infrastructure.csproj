@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B1EEDEE-F78F-43CB-8DEA-0504947D6384}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infrastructure</RootNamespace>
+    <AssemblyName>Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\SharedDlls\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\SharedDlls\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\SharedDlls\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\SharedDlls\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\SharedDlls\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\SharedDlls\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Tracking, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.Unity.Tracking.1.0.0\lib\net45\Microsoft.Practices.Unity.Tracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\SharedDlls\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\SharedDlls\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\SharedDlls\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\SharedDlls\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiPageData.cs" />
+    <Compile Include="ConfigurationHelper.cs" />
+    <Compile Include="EntityFramework\DecimalPrecisionAttribute.cs" />
+    <Compile Include="Exceptions\AlertException.cs" />
+    <Compile Include="Exceptions\ApiException.cs" />
+    <Compile Include="Exceptions\ErrorException.cs" />
+    <Compile Include="Exceptions\ExceptionUtils.cs" />
+    <Compile Include="Exceptions\RestartException.cs" />
+    <Compile Include="Extends\CssExtensions.cs" />
+    <Compile Include="Extends\DataSetExtensions.cs" />
+    <Compile Include="Extends\DataTableExtensions.cs" />
+    <Compile Include="Extends\DateTimeExtensions.cs" />
+    <Compile Include="Extends\DecimalExtensions.cs" />
+    <Compile Include="Extends\DecimalPlaceAdjustDigitsType.cs" />
+    <Compile Include="Extends\DecimalPlaceAdjustType.cs" />
+    <Compile Include="Extends\DynamicData.cs" />
+    <Compile Include="Extends\EnumExtensions.cs" />
+    <Compile Include="Extends\FileExtensions.cs" />
+    <Compile Include="Extends\IEnumerableExtensions.cs" />
+    <Compile Include="Extends\ImageExtensions.cs" />
+    <Compile Include="Extends\IntExtensions.cs" />
+    <Compile Include="Extends\JsonExtensions.cs" />
+    <Compile Include="Extends\ObjectExtensions.cs" />
+    <Compile Include="Extends\StringExtensions.cs" />
+    <Compile Include="Extends\XmlExtensions.cs" />
+    <Compile Include="HttpHandler\ImageHandler.cs" />
+    <Compile Include="IdGenerator.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="ImportAndExport\ExcelDataSetResult.cs" />
+    <Compile Include="ImportAndExport\ExcelHelp.cs" />
+    <Compile Include="ImportAndExport\IExportMin.cs" />
+    <Compile Include="ImportAndExport\NPOI\ExcelDownload.cs" />
+    <Compile Include="ImportAndExport\NPOI\NPOIExportMin.cs" />
+    <Compile Include="ImportAndExport\NPOI\NPOIImportMin.cs" />
+    <Compile Include="ImportAndExport\Office\OfficeExportMin.cs" />
+    <Compile Include="ImportAndExport\Office\OfficeImportMin.cs" />
+    <Compile Include="IocContainer.cs" />
+    <Compile Include="MathUtils.cs" />
+    <Compile Include="MVC\ApiResult.cs" />
+    <Compile Include="MVC\Attribute\IgnoreAppAuthAttribute.cs" />
+    <Compile Include="MVC\Attribute\IgnoreLoginAuthAttribute.cs" />
+    <Compile Include="MVC\Attribute\TokenVerifyAttribute.cs" />
+    <Compile Include="MVC\Attribute\UploadAttribute.cs" />
+    <Compile Include="MVC\CustomAuthorizeAttribute.cs" />
+    <Compile Include="MVC\CustomJsonResult.cs" />
+    <Compile Include="MVC\MvcExtensions.cs" />
+    <Compile Include="MVC\OpenApiResult.cs" />
+    <Compile Include="MVC\VersionUpgradeAuthorizeAttribute.cs" />
+    <Compile Include="MyTypeDescriptionProvider.cs" />
+    <Compile Include="OpenApiPageData.cs" />
+    <Compile Include="OperationResult.cs" />
+    <Compile Include="PadLockPool.cs" />
+    <Compile Include="PageData.cs" />
+    <Compile Include="PathConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AESHelper.cs" />
+    <Compile Include="Security\MD5Helper.cs" />
+    <Compile Include="Security\PDesc.cs" />
+    <Compile Include="Security\SafeXmlDocument.cs" />
+    <Compile Include="SqlParams.cs" />
+    <Compile Include="StringValidator.cs" />
+    <Compile Include="ValidateCode.cs" />
+    <Compile Include="ValueRequireds\ValueRequiredAttribute.cs" />
+    <Compile Include="ValueRequireds\ValueRequiredHelper.cs" />
+    <Compile Include="WebBrowserHelper.cs" />
+    <Compile Include="WebUtils.cs" />
+    <Compile Include="ZipHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

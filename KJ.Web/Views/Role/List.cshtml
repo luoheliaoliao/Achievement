@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Domain.Users
+@using Infrastructure.Extends
+@{
+    var UserTypes = EnumExtensions.ToEnumData(typeof(UserType)).ToJson();
+}
+<div class="container">
+    <div class="kj_search" style="">
+        <div style="min-height:30px;background-color:#EDEDED;width:100%" id="kj_search">
+            <button type="button" class="btn btn-dark ks_search_t" onclick="Search()">查询</button>
+            <input type="text" class="form-control input-sm ks_search_input" placeholder="姓名" aria-controls="datatable-fixed-header" v-model="Search.Name">
+        </div>
+        <div class="clearfloat" style="margin-bottom:5px;"></div>
+    </div>
+    <div class="opretion" style="margin-bottom:10px;background-color:#EDEDED;min-height:40px;width:100%">
+        <div>
+            <button type="button" class="btn btn-success kj_bth" onclick="Add()">新增</button>
+            <button type="button" class="btn btn-danger kj_bth" onclick="BatchDelete()">批量删除</button>
+        </div>
+        <div class="clearfloat" style="margin-bottom:5px;"></div>
+    </div>
+    <div style="height:600px;width:100%">
+        <div id="dg"></div>
+    </div>
+</div>
+<script>
+
+    var SearchVue = new Vue({
+        el: '#kj_search',
+        data:{
+            Search: {
+                Name: ''
+            }
+        }
+    })
+    var reportName = "Get_RoleList"
+    var columns = [[
+         { field: '',title: '选择',checkbox: true},
+         { field: 'Name', title: '角色名称', width: 80, align: 'center' },
+         { field: 'Desc', title: '备注', width: 80, align: 'center' },
+         { field: 'AddTime', title: '添加时间', width: 80, align: 'center', formatter: tFormatTime },
+         { field: 'op', title: '操作', width: 80, align: 'center',formatter:opFormat },
+
+    ]];
+    $(function () {
+        $('#dg').datagrid({
+
+            striped: true,
+            idfield: "ID",
+            pageSize: 50,
+            fit: true,
+            fitColumns: true,
+            pagination: true,
+            rownumbers: true,
+            ShowTip_href: false, //初始化tip
+            nowrap: false,
+            togglebtn: true, //搜索框 收缩/展开
+            pageList: [10, 20, 50, 100],
+            setToolbar: true,
+            lastSelectRowIndex: -1,
+            lastSelectRowData: null,
+            queryParams: GetParams(),
+             url: "@Url.Content("~/Common/GetPageData?reportName=")" + reportName,
+            columns: columns
+
+    });
+    });
+
+    function opFormat(value, row) {
+        var html = "";
+        html += '<a href=\"javascript:void(0)\"  style="color:blue" onclick="Update(' + row["Id"] + ')"> 编辑</a>';
+        html += ' <a href=\"javascript:void(0)\"  style="color:blue" onclick="Delete(' + row["Id"] + ')"> 删除</a>';
+        return html;
+    }
+
+    function GetParams() {
+        var result = SearchVue.Search;
+        return result;
+    }
+
+    function Refresh() {
+        $('#dg').datagrid('reload');
+    }
+
+    function Search() {
+        searchGrid("dg", GetParams());
+    };
+
+
+    function Delete(id) {
+        if (confirm('确认删除吗？')) {
+            $.U1Ajax("@Url.Content("~/Role/Delete/")" + id, {}, function (json) {
+                Refresh();
+            });
+        }
+    }
+
+    function BatchDelete() {
+        var param = {
+            ids: GetSelect()
+        };
+        if (param.ids == "") {
+            alert('请选择要删除的角色！');
+            return;
+        }
+        if (confirm('确认删除吗？')) {
+            $.U1Ajax("@Url.Content("~/Role/BatchDelete")", param, function (json) {
+                Refresh();
+            });
+        }
+    }
+
+    function Add()
+    {
+        PW.getWindow("@Url.Content("~/Role/Edit")", "新增角色", 500, 500)
+      //  openPage("新增角色","@Url.Content("~/KjUser/Edit")",true);
+    }
+
+    function Update(id)
+    {
+        PW.getWindow("@Url.Content("~/Role/Edit/")" + id, "角色详情", 500, 500)
+      //  openPage("角色详情","@Url.Content("~/Role/Edit/")"+id,true);
+    }
+
+</script>

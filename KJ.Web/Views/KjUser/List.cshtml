@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Domain.Users
+@using Infrastructure.Extends
+@{
+    var UserTypes = EnumExtensions.ToEnumData(typeof(UserType)).ToJson();
+}
+<div class="container">
+    <div class="kj_search" style="">
+        <div style="min-height:30px;background-color:#EDEDED;width:100%" id="kj_search">
+            <button type="button" class="btn btn-dark ks_search_t" onclick="Search()">查询</button>
+            <input type="text" class="form-control input-sm ks_search_input" placeholder="姓名、账号" aria-controls="datatable-fixed-header" v-model="Search.NameOrCode">
+            <a class="ks_search_a"> <input type="checkbox" name="hobbies" value="ski" data-parsley-mincheck="2" required class="flat" v-model="Search.IsEable" /> 是否启用</a>
+            <select class="easyui-combobox ks_search_select" data-options="multiple:false" name="state" labelPosition="top" v-model="Search.UserType">
+                <option value="">所有类型</option>
+                <option v-bind:value="item.Key" v-for="item in UserTypes">{{item.Value}}</option>
+            </select>
+            <select class="easyui-combobox ks_search_select" data-options="multiple:false" name="state" labelPosition="top" v-model="Search.UserType">
+                <option value="">角色</option>
+                <option v-bind:value="item.Key" v-for="item in UserTypes">{{item.Value}}</option>
+            </select>
+        </div>
+        <div class="clearfloat" style="margin-bottom:5px;"></div>
+    </div>
+    <div class="opretion" style="margin-bottom:10px;background-color:#EDEDED;min-height:40px;width:100%">
+        <div>
+            <button type="button" class="btn btn-success kj_bth" onclick="Add()">新增</button>
+            <button type="button" class="btn btn-danger kj_bth" onclick="BatchDelete()">批量删除</button>
+        </div>
+        <div class="clearfloat" style="margin-bottom:5px;"></div>
+    </div>
+    <div style="height:600px;width:100%">
+        <div id="dg"></div>
+    </div>
+</div>
+<script>
+
+    var SearchVue = new Vue({
+        el: '#kj_search',
+        data:{
+            Search: {
+                NameOrCode: '',
+                IsEable: true,
+                UserType:''
+            },
+            UserTypes:eval(@Html.Raw(UserTypes))
+        }
+    })
+    var reportName = "Get_KjUserList"
+    var columns = [[
+         { field: '',title: '选择',checkbox: true},
+         { field: 'Name', title: '姓名', width: 80, align: 'center' },
+         { field: 'Account', title: '账号', width: 80, align: 'center' },
+         { field: 'UserTypeName', title: '用户类型', width: 80, align: 'center' },
+         { field: 'UserName', title: '管理员类型', width: 80, align: 'center' },
+         { field: 'RoleName', title: '角色', width: 80, align: 'center' },
+         { field: 'AddTime', title: '添加时间', width: 80, align: 'center', formatter: tFormatTime },
+         { field: 'IsEnable', title: '是否启用', width: 80, align: 'center', formatter: function (value, row) { if (value == 1) return '是'; else return '否' } },
+         { field: 'op', title: '操作', width: 80, align: 'center',formatter:opFormat },
+
+    ]];
+    $(function () {
+        $('#dg').datagrid({
+
+            striped: true,
+            idfield: "ID",
+            pageSize: 50,
+            fit: true,
+            fitColumns: true,
+            pagination: true,
+            rownumbers: true,
+            ShowTip_href: false, //初始化tip
+            nowrap: false,
+            togglebtn: true, //搜索框 收缩/展开
+            pageList: [10, 20, 50, 100],
+            setToolbar: true,
+            lastSelectRowIndex: -1,
+            lastSelectRowData: null,
+            queryParams: GetParams(),
+             url: "@Url.Content("~/Common/GetPageData?reportName=")" + reportName,
+            columns: columns
+
+    });
+    });
+
+    function opFormat(value, row) {
+        var html = "";
+        html += '<a href="#" style="color:blue" onclick="Update(' + row["id"] + ')"> 编辑</a>';
+        html += ' <a href="#" style="color:blue" onclick="Delete('+row["id"]+')"> 删除</a>';
+        html += ' <a href="#" style="color:blue" onclick="Enable(' + row["id"] + ')"> 启用</a>';
+        html += ' <a href="#" style="color:blue" onclick="Forbidden(' + row["id"] + ')"> 禁用</a>';
+        return html;
+    }
+
+    function GetParams() {
+        var result = SearchVue.Search;
+        return result;
+    }
+
+    function Refresh() {
+        $('#dg').datagrid('reload');
+    }
+
+    function Search() {
+        searchGrid("dg", GetParams());
+    };
+
+
+    function BatchDelete() {
+        var param = {
+            ids: GetSelect()
+        };
+        if (param.ids == "") {
+            alert('请选择要删除的用户！');
+            return;
+        }
+        if (confirm('确认删除吗？')) {
+            $.U1Ajax("@Url.Content("~/KjUser/BatchDelete")", param, function (json) {
+                Refresh();
+            });
+        }
+    }
+
+    function Forbidden(id)
+    {
+        if (confirm('确认禁用该用户吗？')) {
+            $.U1Ajax("@Url.Content("~/KjUser/Forbidden")", {id:id}, function (json) {
+                Refresh();
+            });
+        }
+    }
+
+    function Enable(id)
+    {
+        if (confirm('确认启用该用户吗？')) {
+            $.U1Ajax("@Url.Content("~/KjUser/Enable")", {id:id}, function (json) {
+                Refresh();
+            });
+    }
+    }
+
+
+    function Add()
+    {
+        openPage("新增用户","@Url.Content("~/KjUser/Edit")",true);
+    }
+
+
+    function Update(id)
+    {
+        openPage("新增用户","@Url.Content("~/KjUser/Edit/")"+id,true);
+    }
+
+</script>

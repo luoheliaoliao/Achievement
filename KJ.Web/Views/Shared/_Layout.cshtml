@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜡笔小新</title>
+    <link href="~/Resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Resources/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Resources/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="~/Resources/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/Resources/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/Resources/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/Resources/build/css/custom.min.css" rel="stylesheet" />
+    <link href="~/Resources/jquery-easyui-1.7.0/themes/icon.css" rel="stylesheet" />
+
+    @*<link href="~/Resources/jquery-easyui-1.7.0/themes/black/easyui.css" rel="stylesheet" />*@
+    <link href="~/Resources/vendors/switchery/dist/switchery.css" rel="stylesheet" />
+    <link href="~/Resources/jquery-easyui-1.7.0/themes/bootstrap/easyui.css" rel="stylesheet" />
+    @*<link href="~/Resources/jquery-easyui-1.7.0/themes/default/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Resources/jquery-easyui-1.7.0/themes/metro/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Resources/jquery-easyui-1.7.0/themes/material/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Resources/jquery-easyui-1.7.0/themes/gray/easyui.css" rel="stylesheet" />*@
+
+    <script src="~/Resources/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Resources/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Resources/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="~/Resources/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="~/Resources/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Resources/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Resources/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="~/Resources/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="~/Resources/vendors/switchery/dist/switchery.min.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="~/Resources/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/Resources/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/Resources/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/Resources/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Resources/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="~/Resources/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="~/Resources/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Resources/vendors/moment/min/moment.min.js"></script>
+    <script src="~/Resources/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/Resources/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/Resources/build/js/custom.js"></script>
+
+    <script src="~/Resources/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script src="~/Resources/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+    <script src="~/Resources/Scripts/Default.js"></script>
+    <script src="~/Resources/Scripts/windows.js"></script>
+    <script src="~/Resources/Scripts/vue.min.js"></script>
+    <script src="~/Resources/Scripts/jquery.KjEasyGrid.js"></script>
+    <script src="~/Resources/Scripts/Validatebox.U1Rules.js"></script>
+    <style>
+        .clearfloat {
+            clear: both;
+            height: 0;
+            font-size: 1px;
+            line-height: 0px;
+        }
+
+        .kj_bth {
+            width: 80px;
+            margin-left: 8px;
+            margin-top: 8px;
+        }
+
+        .textbox {
+            float: right;
+            margin-top: 8px;
+            border-width: 0px;
+            margin-right:8px;
+        }
+
+        .combo-arrow {
+            background-color: white;
+        }
+
+        .calendar-title {
+            color: #fff;
+            background: #1ABB9C;
+        }
+
+        .datebox {
+            margin-top: 8px;
+            float: right;
+            margin-right: 8px;
+            margin-left: 0px;
+        }
+
+        #dg {
+            width: 100%;
+            height: 500px;
+        }
+        .kj_search {
+            margin-bottom: 10px;
+            background-color: #EDEDED;
+            min-height: 40px;
+            width: 100%
+        }
+
+        .ks_search_t {
+            width: 100px;
+            float: right;
+            margin-left: 8px;
+            height: 30px;
+            margin-top: 8px;
+        }
+
+        .ks_search_input {
+            width: 140px;
+            float: right;
+            margin-left: 8px;
+            margin-top: 8px;
+        }
+
+        .ks_search_a {
+            width: 120px;
+            float: right;
+            margin-left: 8px;
+            margin-top: 8px;
+            text-align: center;
+            display: block;
+            height: 30px;
+            line-height: 30px
+        }
+
+        .ks_search_select {
+            width: 140px;
+            float: right !important;
+            margin-left: 8px;
+            margin-top: 8px;
+            margin-right: 8px;
+        }
+
+        .input-defalut {
+            width: 160px;
+            float: left;
+        }
+
+        .fromtable {
+            border-collapse: separate;
+            border-spacing: 0px 10px;
+        }
+
+            .fromtable tr {
+                /*height: 50px;*/
+            }
+
+        .fromtabletd {
+            width: 6%;
+            text-align: right;
+            margin-bottom: 8px;
+            background-color: #e1e3e9;
+        }
+
+        .fromtabletdt {
+            width: 50%;
+            margin-bottom: 8px;
+            border: 1px solid #F0F0F0
+        }
+
+        .kjwarning {
+            color: red;
+            float: left;
+            margin-left: 8px;
+            font-weight: 800
+        }
+
+        .alert {
+            margin-top: 8px;
+            margin-top: 8px;
+            left: 0;
+            opacity: 1;
+            float: left;
+            margin: 0 0 0 20px;
+            padding: 3px 10px;
+            color: #FFF;
+            border-radius: 3px 4px 4px 3px;
+            background-color: #CE5454;
+            max-width: 170px;
+            white-space: pre;
+            position: relative;
+            left: -8px;
+            transition: .15s ease-out;
+        }
+
+            .alert::after {
+                content: '';
+                display: block;
+                height: 0;
+                width: 0;
+                border-color: transparent #CE5454 transparent transparent;
+                border-style: solid;
+                border-width: 11px 7px;
+                position: absolute;
+                left: -13px;
+                top: 1px;
+            }
+
+        .up-img-cover {
+            width: 100px;
+            height: 100px;
+        }
+
+            .up-img-cover img {
+                width: 100%;
+            }
+
+        .file-box {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background: url('../Resources/morenImage.png')no-repeat;
+            background-size: 100px 100px;
+        }
+
+        #input_file {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .fromtabletdt .col-xs-12 {
+            /*margin-top: 4px;
+        margin-bottom: 4px;*/
+        }
+
+        .tfromtabletd {
+            width: 15%;
+            text-align: right;
+            margin-bottom: 8px;
+            background-color: #e1e3e9;
+        }
+
+        .tfromtabletdt {
+            width: 82%;
+            margin-bottom: 8px;
+            border: 1px solid #F0F0F0
+        }
+    </style>
+</head>
+<body  style="background-color:white">
+
+    <div>
+        @RenderBody()
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,378 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .input-defalut {
+        width: 160px;
+        float: left;
+    }
+
+    .fromtable {
+        border-collapse: separate;
+        border-spacing: 0px 10px;
+    }
+
+        .fromtable tr {
+            /*height: 50px;*/
+        }
+
+    .fromtabletd {
+        width: 6%;
+        text-align: right;
+        margin-bottom: 8px;
+        background-color: #e1e3e9;
+    }
+
+    .fromtabletdt {
+        width: 50%;
+        margin-bottom: 8px;
+        border: 1px solid #F0F0F0
+    }
+
+    .kjwarning {
+        color: red;
+        float: left;
+        margin-left: 8px;
+        font-weight: 800
+    }
+
+    .alert {
+        margin-top: 8px;
+        margin-top: 8px;
+        left: 0;
+        opacity: 1;
+        float: left;
+        margin: 0 0 0 20px;
+        padding: 3px 10px;
+        color: #FFF;
+        border-radius: 3px 4px 4px 3px;
+        background-color: #CE5454;
+        max-width: 170px;
+        white-space: pre;
+        position: relative;
+        left: -8px;
+        transition: .15s ease-out;
+    }
+
+        .alert::after {
+            content: '';
+            display: block;
+            height: 0;
+            width: 0;
+            border-color: transparent #CE5454 transparent transparent;
+            border-style: solid;
+            border-width: 11px 7px;
+            position: absolute;
+            left: -13px;
+            top: 1px;
+        }
+
+    .up-img-cover {
+        width: 100px;
+        height: 100px;
+    }
+
+        .up-img-cover img {
+            width: 100%;
+        }
+
+    .file-box {
+        position: relative;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background: url('../Resources/morenImage.png')no-repeat;
+        background-size: 100px 100px;
+    }
+
+    #input_file {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    .fromtabletdt .col-xs-12 {
+        /*margin-top: 4px;
+        margin-bottom: 4px;*/
+    }
+</style>
+<link rel="stylesheet" href="~/Resources/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="~/Resources/kindeditor/plugins/code/prettify.css" />
+<link href="~/gentelella-master/vendors/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet" />
+<script charset="utf-8" src="~/Resources/kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="~/Resources/kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="~/Resources/kindeditor/plugins/code/prettify.js"></script>
+<script src="~/gentelella-master/vendors/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<div class="x_content" style="margin-top:20px;">
+    <table class="fromtable">
+        <tr>
+            <td class="fromtabletd">      <label>姓名<span class="required" style="color:red; ">*</span>：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control input-defalut">
+                    <div class="alert" style="margin-top:4px;padding-left:10px;"><i class="fa fa-warning"></i> 不能为空！</div>
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>账号：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control input-defalut">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>密码：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="password" class="form-control input-defalut" value="passwordonetwo">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>再次输入密码：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="password" class="form-control input-defalut" value="passwordonetwo">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>用户类型：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select class="select2_single form-control input-defalut" tabindex="-1">
+                    </select>
+                    <div class="alert" style="margin-top:4px;padding-left:10px;"><i class="fa fa-warning"></i> 不能为空！</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>性别：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" class="flat" name="iCheck" checked="checked"> 男
+                        </label>
+                        <label>
+                            <input type="radio" class="flat" name="iCheck"> 女
+                        </label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>出生日期：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input class="easyui-datetimebox" name="birthday"
+                           data-options="required:true,showSeconds:false" value="2018-01-02" style="width:150px; height:30px;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>角色：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+                        <label style="margin-right:8px;margin-top:8px;">
+                            <input type="checkbox" class="flat"> Disabled
+                        </label>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>头像：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input id="Image" type="hidden" />
+                    <div class="file-box" style="margin-left: 10px; margin-top: 5px; margin-bottom: 5px;float:left">
+                        <input type="file" value="" name="file" id="input_file"
+                               accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this,0)">
+
+                    </div>
+                    <div style="float:left; margin-left:10px; margin-top:20px;">建议上传图片比例1:1</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>详细图片：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input id="Image" type="hidden" />
+                    <div class="file-box" style="margin-left: 10px; margin-top: 5px; margin-bottom: 5px;float:left">
+                        <input type="file" value="" name="file" id="input_file"
+                               accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this,0)">
+
+                    </div>
+                    <div style="float:left; margin-left:10px; margin-top:20px;">建议上传图片比例1:1</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>简介：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <textarea style="width: 100% !important; height: 80px;" id="Infor" maxlength="200">等待</textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">      <label>详细信息：</label></td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <textarea id="txtContent" style="visibility: hidden; width: 100%; height: 300px; border: 0;" runat="server" maxlength="500"></textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd"> 多图 </td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="file-loading">
+                        <input id="file-fr" name="file-fr[]" type="file" multiple>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="fromtabletd">  </td>
+            <td class="fromtabletdt">
+                <div class="col-md-9 col-sm-9 col-xs-12"  style="margin-top:8px;">
+                    <button class="btn btn-primary" type="button">Cancel</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    function imgPreview(fileDom, i) {
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+        }
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("请选择图片！");
+            return;
+        }
+        //读取完成
+        reader.onload = function (e) {
+            //图片路径设置为读取的图片
+            // img.src = e.target.result;
+            console.log(document.getElementsByClassName('file-box'));
+            document.getElementsByClassName('file-box')[i].style.background = "url(" + e.target.result + ")no-repeat:width:100%;height:40%;background-size:100%100%";
+
+            document.getElementsByClassName('file-box')[i].style.backgroundSize = '200px 160px';
+            console.log('reader', reader)
+        };
+        reader.readAsDataURL(file);
+
+        var ss = $('#input_file');
+        var formData = new FormData();
+        formData.append('photo', $('#input_file')[0].files[0]);
+        //ajax请求
+        @*$.ajax({
+            type: "post",
+            url: "@Url.Content("~/Common/UploadImage")",
+            data: formData,
+        dataType: 'json',
+        processData: false, // 告诉jQuery不要去处理发送的数据
+        contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+        xhrFields: { withCredentials: true },
+        async: true,    //默认是true：异步，false：同步。
+        success: function (data) {
+            if (data != null && data.Tag == -999) {
+                alert(data.Message)
+            } else {
+                $("#Image").val(data);
+                alert("上传成功!");
+            }
+        },
+        error: function (data) {
+            alert("上传失败!")
+        },
+        })*@
+    }
+
+    $(function () {
+        InitKindEditer();
+
+        $('#file-fr').fileinput({
+            theme: 'fas',
+            language: 'fr',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif']
+        });
+    });
+    function InitKindEditer() {
+        KindEditor.ready(function (K) {
+            window.currentEditor = K.create('#txtContent', {
+                uploadJson: "@Url.Content("~/Common/UploadKindEditerImage")",
+                allowFileManager: true,
+            items: [
+                'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'multiimage', 'table', 'hr', 'emoticons', 'link', 'unlink', '|', 'about'
+            ],
+            urlType: 'domain',
+            afterCreate: function () {
+                this.sync();
+            },
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    }
+
+</script>

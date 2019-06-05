@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Reps>
+
+  <Rep key="Get_KjUserList" Remark="获取用户列表">
+    <ReportSql>
+      <![CDATA[
+SELECT Id,
+       Name,
+       Account,
+       Image,
+       CASE UserType
+           WHEN 0 THEN
+               '管理员'
+           ELSE
+               '员工'
+       END UserTypeName,
+       CASE IsAdmin
+           WHEN 1 THEN
+               '超级管理员'
+           ELSE
+               '一般用户'
+       END UserName,
+       (
+           SELECT r.Name + ';'
+           FROM dbo.Role r
+               JOIN dbo.UserRole u
+                   ON u.RoleId = r.Id
+           WHERE u.UserId = k.Id
+           FOR XML PATH('')
+       ) RoleName,
+	   k.IsAdmin,
+     k.AddTime
+FROM dbo.KjUser k
+    WHERE   @Param
+      ]]>
+    </ReportSql>
+    <TotalSql>
+      <![CDATA[
+        SELECT COUNT(0)
+FROM dbo.KjUser k
+    WHERE   @Param
+      ]]>
+    </TotalSql>
+    <Dynamic property="@Param">
+      <c property="NameOrCode" prepend="AND" type="LIKE">
+        <![CDATA[
+         ((k.Account LIKE '%@NameOrCode%') OR ( k.Name LIKE '%@NameOrCode%')) 
+        ]]>
+      </c>
+      <c property="RoleId" prepend="AND" type="">
+        <![CDATA[
+       EXISTS(SELECT * FROM  UserRole WHERE  UserId=k.Id AND RoleId=@RoleId)
+        ]]>
+      </c>
+    <c property="IsEnable" prepend="AND" type="">
+      <![CDATA[
+       k.IsEnable=@IsEnable
+        ]]>
+    </c>
+    </Dynamic>
+  </Rep>
+
+  <Rep key="Get_RoleList" Remark="获取权限列表">
+    <ReportSql>
+      <![CDATA[
+SELECT Id,
+       Name,
+       [Desc],
+       AddTime
+FROM dbo.Role
+    WHERE   @Param
+      ]]>
+    </ReportSql>
+    <TotalSql>
+      <![CDATA[
+        SELECT COUNT(0)
+FROM dbo.Role
+    WHERE   @Param
+      ]]>
+    </TotalSql>
+    <Dynamic property="@Param">
+      <c property="Name" prepend="AND" type="LIKE">
+        <![CDATA[
+          Name=@Name
+        ]]>
+      </c>
+    </Dynamic>
+  </Rep>
+</Reps>

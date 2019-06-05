@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>蜡笔小新</title>
+    <!-- Bootstrap -->
+    <link href="~/Resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Resources/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Resources/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="~/Resources/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/Resources/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/Resources/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/Resources/build/css/custom.min.css" rel="stylesheet" />
+
+    <link href="~/Resources/jquery-easyui-1.7.0/themes/black/tabs.css" rel="stylesheet" />
+    <link href="~/Resources/jquery-easyui-1.7.0/themes/icon.css" rel="stylesheet" />
+    <link href="~/Resources/jquery-easyui-1.7.0/themes/black/menu.css" rel="stylesheet" />
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Content("~")" class="site_title"><i class="fa fa-paw"></i> <span>新酱!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/Resources/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>欢迎,</span>
+                            <h2>新酱</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        @{
+                            Html.RenderAction("MenuLeft", "Home");
+                        }
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            @{
+                Html.RenderAction("Head", "Home");
+            }
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <!-- top tiles -->
+                <div id="centerTab" style="height:500px">
+                    <div title="首页" data-options="closable:true" style="padding:10px  ;padding-left: 4px;">
+                        @{
+                            Html.RenderAction("Content", "Home");
+                        }
+                    </div>
+                    <div title="测试" data-options="closable:true" style="padding:10px  ;padding-left: 4px;">
+                        This is the help content.
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            @{
+                Html.RenderAction("Footer", "Home");
+            }
+            <!-- /footer content -->
+        </div>
+    </div>
+    <div id="tab_menu" style="width: 120px; display: none">
+        <div id="closeItem">
+            关闭标签页
+        </div>
+        <div id="closeOthers">
+            关闭其它标签页
+        </div>
+        <div id="refresh">
+            刷新
+        </div>
+        @* <div data-options="iconCls:'icon-addbookmark-tab'" id="addBookmark">
+            新增到书签
+        </div>*@
+        @*<div id="lockTab">
+            锁定标签
+        </div>
+        <div id="unlockTab">
+            解锁标签
+        </div>*@
+    </div>
+    <!-- jQuery -->
+    <script src="~/Resources/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Resources/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Resources/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="~/Resources/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="~/Resources/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Resources/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Resources/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="~/Resources/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="~/Resources/vendors/Flot/jquery.flot.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="~/Resources/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="~/Resources/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/Resources/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/Resources/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/Resources/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Resources/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="~/Resources/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="~/Resources/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Resources/vendors/moment/min/moment.min.js"></script>
+    <script src="~/Resources/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/Resources/build/js/custom.js"></script>
+
+    <script src="~/Resources/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script src="~/Resources/Scripts/Default.js"></script>
+    <script src="~/Resources/Scripts/windows.js"></script>
+    <script>
+        var arrayAllPages = [];
+        $(function () {
+
+            KJ.InitPageArray();
+            $("#centerTab").tabs({
+                tabWidth: 100,
+                //scrollable:true,
+            fit:true,
+
+                //height: 800,
+                onContextMenu: function (e, title, index)
+                {
+                    var tab = $('#centerTab').tabs("getTab", title);
+                    $('#tab_menu').menu(
+                        {
+                            onClick: function (item) {
+                                if (item.id == "refresh") {
+                                    var m_Iframe = $('#centerTab').tabs("getTab", title).find("iframe");
+                                    var url = m_Iframe.attr("src");
+                                    m_Iframe.attr("src", url);
+                                } else if (item.id == "closeItem") {
+                                    KJ.closeTab(title);
+                                } else if (item.id == "closeOthers") {
+                                    KJ.closeOtherTabs(title);
+                                } else if (item.id == "addBookmark") {
+                                    var m_Iframe = $('#centerTab').tabs("getTab", title).find("iframe");
+                                    var url = m_Iframe.attr("src");
+                                    KJ.AddMark(title, url);
+                                }
+                                //else if (item.id == "lockTab") {
+                                //    KJ.lockTab(title);
+                                //} else if (item.id == "unlockTab") {
+                                //    KJ.unlockTab(title);
+                                //}
+                            }
+                        });
+                    var menuleft;
+                    //if (closable==und == true) {
+                    //    menuleft = tab.panel("options").tab.offset().left + (tab.panel("options").tab.width() - 34);
+                    //} else {
+                    //    menuleft = tab.panel("options").tab.offset().left + (tab.panel("options").tab.width() - 20);
+                    //}
+                    menuleft = tab.panel("options").tab.offset().left + (tab.panel("options").tab.width() - 20);
+                    $('#tab_menu').menu("show", {
+                        left: menuleft,
+                        top: tab.panel("options").tab.offset().top + 28
+                    });
+                    event.stopPropagation();
+                    window.event.returnValue = false;
+                }
+            })
+        })
+
+        function Close() {
+            alert(111);
+            $('#mydialog').dialog('close');
+        }
+
+    </script>
+</body>
+</html>
